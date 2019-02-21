@@ -1,0 +1,125 @@
+<html>
+<body>
+<div id="div">
+<script>
+var fontSize = 14;
+
+var name = "https://c8.alamy.com/comp/BX8FGF/different-strengths-of-atorvastatin-trade-name-lipitor-made-by-pfizer-BX8FGF.jpg";
+var response = {
+    "detection_boxes": [
+        [
+            87,
+            106,
+            190,
+            178
+        ],
+		[
+            219,
+            480,
+            295,
+            530
+        ],
+		[
+            397,
+            547,
+            476,
+            600
+        ],
+		[
+            1060,
+            67,
+            1129,
+            172
+        ],
+		[
+            770,
+            710,
+            895,
+            782
+        ],
+		[
+            585,
+            350,
+            703,
+            421
+        ]
+    ],
+    "detection_classes": [
+        "pfe",
+		"pfe",
+		"pfe",
+		"pfe",
+		"pfe",
+		"pfe"
+    ],
+    "detection_scores": [
+        1.00,
+		1.00,
+		1.00,
+		1.00,
+		0.84,
+		0.58
+    ]
+};
+
+function createCanvas(oImg, items) {
+    var oCanvas = document.createElement("CANVAS");
+    var ctx = oCanvas.getContext("2d");
+
+    function resizeCanvas() {
+        // set the image width to the window width
+        imgRatioW = oImg.naturalWidth / window.innerWidth;
+        oImg.width  = oImg.naturalWidth;
+        oImg.height = oImg.naturalHeight ;
+        // adjust the canvas dimension
+        oCanvas.width  = oImg.naturalWidth;
+        oCanvas.height = oImg.naturalHeight;
+        // get the width & height for the image / canvas
+        var itemRatioW = oCanvas.width  / oImg.naturalWidth;
+        var itemRatioH = oCanvas.height / oImg.naturalHeight;
+        // draw the canvas
+        ctx.drawImage(oImg, 0, 0, oImg.width, oImg.height);
+        ctx.lineWidth="3";
+        ctx.strokeStyle="blue";
+        ctx.fillStyle = "white";
+        ctx.font = fontSize + "px Arial";
+        // display the items
+        for (var i = 0; i < items.length; i++) {
+            var text = "#" + i  + ": " + response.detection_classes[i] + " " + ( response.detection_scores[i] * 1 ).toFixed(2) + "%";
+            // get the box attributes
+            var left = items[i][0]  ;
+            var top  = items[i][1] ;
+            var width  = (items[i][2]  - items[i][0]  );
+            var height = (items[i][3] - items[i][1]  );
+
+            // draw the box
+            ctx.strokeRect(left, top, width, height);
+            // write the text with the box angle
+            ctx.save();
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(left, top-10, ctx.measureText(text).width + ctx.lineWidth, ctx.lineWidth + fontSize);
+            // write the text in the box
+            ctx.fillStyle = "white";
+            ctx.fillText(text, left, top-10 + fontSize);
+            ctx.restore();
+        }
+        
+    }
+    // call the resize function
+    resizeCanvas();
+    // add the event listener
+    window.addEventListener('resize', resizeCanvas, false);
+    return oCanvas;
+}
+
+window.onload = function() {
+    var oImg = document.createElement("IMG");
+    oImg.onload = function(){
+        document.getElementById("div").appendChild(createCanvas(this, response.detection_boxes));
+    }
+    oImg.src = name;
+};
+</script>
+</div>
+</body>
+</html>
