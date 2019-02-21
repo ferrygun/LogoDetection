@@ -1,5 +1,4 @@
 # LogoDetection
 LogoDetection
 
-Required component:
-https://github.com/ferrygun/RN1
+I have also uploaded the same sets in this Git: https://github.com/ferrygun/RN1 to be used in Google Colab.
