@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>00000820.jpg</filename>
+	<path>C:\FD\Py\DownloadImg\images\00000820.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>292</width>
+		<height>164</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pfe</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>144</xmin>
+			<ymin>110</ymin>
+			<xmax>225</xmax>
+			<ymax>162</ymax>
+		</bndbox>
+	</object>
+</annotation>
